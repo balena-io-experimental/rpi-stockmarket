@@ -22,6 +22,7 @@ class GoogleFinanceAPI:
 colourWhite = (255, 255, 255)
 colourBlack = (0, 0, 0)
 colourGreen = (3, 192, 60)
+colourRed = (220, 69, 69)
 
 updateRate = 60 # seconds
  
@@ -84,6 +85,12 @@ if __name__ == "__main__":
         stockTitle = 'stock: ' + str(quote["t"])
         stockPrice = 'price: ' + str(quote["l_cur"])
         stockChange= 'change: ' + str(quote["c"]) + ' (' + str(quote["cp"]) + '%)'
+
+        if quote["c"] < 0:
+            changeColour = colourRed
+        else:
+            changeColour = colourGreen
+
         # blank the screen
         mytft.screen.fill(colourBlack)
         # set the anchor for the current weather data text
@@ -100,7 +107,7 @@ if __name__ == "__main__":
         mytft.screen.blit(text_surface, (textAnchorX, textAnchorY))
         print stockPrice
         textAnchorY+=textYoffset
-        text_surface = font.render(stockChange, True, colourGreen)
+        text_surface = font.render(stockChange, True, changeColour)
         mytft.screen.blit(text_surface, (textAnchorX, textAnchorY))
         print stockChange
         textAnchorY+=textYoffset
