@@ -24,7 +24,7 @@ colourBlack = (0, 0, 0)
 colourGreen = (3, 192, 60)
 colourRed = (220, 69, 69)
 
-updateRate = 60 # seconds
+updateRate = 15 # seconds
  
 class pitft :
     screen = None;
@@ -79,17 +79,24 @@ fontSm = pygame.font.Font(fontpath, 18)
 if __name__ == "__main__":
     c = GoogleFinanceAPI()
     companyName = os.getenv('STOCK', "GOOG")
+    print 'company name: '+companyName
     marketName = os.getenv('MARKET', "NASDAQ")
+    print 'market name: '+marketName
     while 1:
         quote = c.get(companyName,marketName)
         stockTitle = 'stock: ' + str(quote["t"])
+        print stockTitle
         stockPrice = 'price: ' + str(quote["l_cur"])
+        print stockPrice
         stockChange= 'change: ' + str(quote["c"]) + ' (' + str(quote["cp"]) + '%)'
+        print stockChange
 
         if quote["c"] < 0:
             changeColour = colourRed
+            print 'font colour red'
         else:
             changeColour = colourGreen
+            print 'font colour green'
 
         # blank the screen
         mytft.screen.fill(colourBlack)
