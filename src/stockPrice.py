@@ -22,7 +22,7 @@ class GoogleFinanceAPI:
 colourWhite = (255, 255, 255)
 colourBlack = (0, 0, 0)
 
-updateRate = 60 # seconds
+updateRate = 30 # seconds
  
 class pitft :
     screen = None;
@@ -70,7 +70,7 @@ pygame.mouse.set_visible(False)
 # choose the font
 fontpath = pygame.font.match_font('dejavusansmono')
 # set up 2 sizes
-font = pygame.font.Font(fontpath, 20)
+font = pygame.font.Font(fontpath, 40)
 fontSm = pygame.font.Font(fontpath, 18)
         
         
@@ -79,25 +79,32 @@ if __name__ == "__main__":
     
     while 1:
         quote = c.get("AAPL","NASDAQ")
-        stockTitle = 'stock: ', quote["t"]
-        stockPrice = 'price: ', quote["l_cur"]
-        stockChange= 'change: ', quote["c"], ' (',quote["cp"],'%)'
+        stockTitle = 'stock: ', str(quote["t"])
+        stockPrice = 'price: ', str(quote["l_cur"])
+        stockChange= 'change: ', str(quote["c"]), ' (',str(quote["cp"]),'%)'
         # blank the screen
         mytft.screen.fill(colourBlack)
         # set the anchor for the current weather data text
-        textAnchorX = 140
-        textAnchorY = 5
-        textYoffset = 20
+        textAnchorX = 10
+        textAnchorY = 10
+        textYoffset = 40
  
         # add current weather data text artifacts to the screen
-        text_surface = font.render(str(stockTitle), True, colourWhite)
+        text_surface = font.render(stockTitle, True, colourWhite)
         mytft.screen.blit(text_surface, (textAnchorX, textAnchorY))
+        print stockTitle
         textAnchorY+=textYoffset
-        text_surface = font.render(str(stockPrice), True, colourWhite)
+        text_surface = font.render(stockPrice, True, colourWhite)
         mytft.screen.blit(text_surface, (textAnchorX, textAnchorY))
+        print stockPrice
         textAnchorY+=textYoffset
-        text_surface = font.render(str(stockChange), True, colourWhite)
+        text_surface = font.render(stockChange, True, colourWhite)
         mytft.screen.blit(text_surface, (textAnchorX, textAnchorY))
+        print stockChange
+        textAnchorY+=textYoffset
+        text_surface = font.render("test string", True, colourWhite)
+        mytft.screen.blit(text_surface, (textAnchorX, textAnchorY))
+        print stockTitle
         textAnchorY+=textYoffset
 
         # refresh the screen with all the changes
