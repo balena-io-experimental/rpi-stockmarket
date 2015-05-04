@@ -79,9 +79,9 @@ if __name__ == "__main__":
     
     while 1:
         quote = c.get("AAPL","NASDAQ")
-        stockTitle = 'stock: ', str(quote["t"])
-        stockPrice = 'price: ', str(quote["l_cur"])
-        stockChange= 'change: ', str(quote["c"]), ' (',str(quote["cp"]),'%)'
+        stockTitle = 'stock: ' + str(quote["t"])
+        stockPrice = 'price: ' + str(quote["l_cur"])
+        stockChange= 'change: ' + str(quote["c"]) + ' (' + str(quote["cp"]) + '%)'
         # blank the screen
         mytft.screen.fill(colourBlack)
         # set the anchor for the current weather data text
