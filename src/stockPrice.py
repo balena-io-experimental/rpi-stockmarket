@@ -82,7 +82,8 @@ if __name__ == "__main__":
     print 'company name: '+companyName
     marketName = os.getenv('MARKET', "NASDAQ")
     print 'market name: '+marketName
-    while 1:
+
+    while True:
         quote = c.get(companyName,marketName)
         stockTitle = 'stock: ' + str(quote["t"])
         print stockTitle
@@ -91,7 +92,7 @@ if __name__ == "__main__":
         stockChange= 'change: ' + str(quote["c"]) + ' (' + str(quote["cp"]) + '%)'
         print stockChange
 
-        if quote["c"] < 0:
+        if float(quote["c"]) < 0:
             changeColour = colourRed
             print 'font colour red'
         else:
