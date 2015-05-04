@@ -23,7 +23,7 @@ colourWhite = (255, 255, 255)
 colourBlack = (0, 0, 0)
 colourGreen = (3, 192, 60)
 
-updateRate = 30 # seconds
+updateRate = 60 # seconds
  
 class pitft :
     screen = None;
