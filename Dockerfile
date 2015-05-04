@@ -1,5 +1,5 @@
 #Base image
-FROM resin/rpi-raspbian:jessie
+FROM resin/rpi-raspbian
 
 RUN apt-get update && apt-get install -y sudo usbutils net-tools iputils-ping module-init-tools ifupdown 
 
