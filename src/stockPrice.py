@@ -77,9 +77,10 @@ fontSm = pygame.font.Font(fontpath, 18)
         
 if __name__ == "__main__":
     c = GoogleFinanceAPI()
-    
+    companyName = os.getenv('STOCK', "GOOG")
+    marketName = os.getenv('MARKET', "NASDAQ")
     while 1:
-        quote = c.get("AAPL","NASDAQ")
+        quote = c.get(companyName,marketName)
         stockTitle = 'stock: ' + str(quote["t"])
         stockPrice = 'price: ' + str(quote["l_cur"])
         stockChange= 'change: ' + str(quote["c"]) + ' (' + str(quote["cp"]) + '%)'
