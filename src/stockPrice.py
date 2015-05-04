@@ -90,13 +90,13 @@ if __name__ == "__main__":
         textYoffset = 20
  
         # add current weather data text artifacts to the screen
-        text_surface = font.render(stockTitle, True, colourWhite)
+        text_surface = font.render(str(stockTitle), True, colourWhite)
         mytft.screen.blit(text_surface, (textAnchorX, textAnchorY))
         textAnchorY+=textYoffset
-        text_surface = font.render(stockPrice, True, colourWhite)
+        text_surface = font.render(str(stockPrice), True, colourWhite)
         mytft.screen.blit(text_surface, (textAnchorX, textAnchorY))
         textAnchorY+=textYoffset
-        text_surface = font.render(stockChange, True, colourWhite)
+        text_surface = font.render(str(stockChange), True, colourWhite)
         mytft.screen.blit(text_surface, (textAnchorX, textAnchorY))
         textAnchorY+=textYoffset
 
