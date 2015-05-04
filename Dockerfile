@@ -1,5 +1,5 @@
 #Base image
-FROM resin/rpi-raspbian:jessie-2015-02-08
+FROM resin/rpi-raspbian:jessie-2015-04-29
 
 RUN apt-get update && apt-get install -y sudo usbutils net-tools iputils-ping module-init-tools ifupdown 
 
@@ -35,6 +35,7 @@ ENTRYPOINT ["/usr/bin/entry.sh"]
 # Install Python.
 RUN apt-get update
 RUN apt-get install -y python python-dev python-pip python-pygame
+
 ENV INITSYSTEM on
 
 ADD /src/ /usr/src/app
