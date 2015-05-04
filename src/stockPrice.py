@@ -77,27 +77,28 @@ fontSm = pygame.font.Font(fontpath, 18)
         
         
 if __name__ == "__main__":
-    c = GoogleFinanceAPI()
-    companyName = "AAPL" #os.getenv('STOCK', "GOOG")
+    #c = GoogleFinanceAPI()
+    print 'starting'
+    companyName = os.getenv('STOCK', "GOOG")
     print 'company name: '+companyName
-    marketName = "NASDAQ" #os.getenv('MARKET', "NASDAQ")
+    marketName = os.getenv('MARKET', "NASDAQ")
     print 'market name: '+marketName
 
     while True:
-        quote = c.get(companyName,marketName)
-        stockTitle = 'stock: ' + str(quote["t"])
-        print stockTitle
-        stockPrice = 'price: ' + str(quote["l_cur"])
-        print stockPrice
-        stockChange= 'change: ' + str(quote["c"]) + ' (' + str(quote["cp"]) + '%)'
-        print stockChange
+        # quote = c.get(companyName,marketName)
+        # stockTitle = 'stock: ' + str(quote["t"])
+        # print stockTitle
+        # stockPrice = 'price: ' + str(quote["l_cur"])
+        # print stockPrice
+        # stockChange= 'change: ' + str(quote["c"]) + ' (' + str(quote["cp"]) + '%)'
+        # print stockChange
 
-        if float(quote["c"]) < 0:
-            changeColour = colourRed
-            print 'font colour red'
-        else:
-            changeColour = colourGreen
-            print 'font colour green'
+        # if float(quote["c"]) < 0:
+        #     changeColour = colourRed
+        #     print 'font colour red'
+        # else:
+        #     changeColour = colourGreen
+        #     print 'font colour green'
 
         # blank the screen
         mytft.screen.fill(colourBlack)
@@ -107,17 +108,20 @@ if __name__ == "__main__":
         textYoffset = 40
  
         # add current weather data text artifacts to the screen
-        text_surface = font.render(stockTitle, True, colourWhite)
-        mytft.screen.blit(text_surface, (textAnchorX, textAnchorY))
-        print stockTitle
-        textAnchorY+=textYoffset
-        text_surface = font.render(stockPrice, True, colourWhite)
-        mytft.screen.blit(text_surface, (textAnchorX, textAnchorY))
-        print stockPrice
-        textAnchorY+=textYoffset
-        text_surface = font.render(stockChange, True, changeColour)
-        mytft.screen.blit(text_surface, (textAnchorX, textAnchorY))
-        print stockChange
+        # text_surface = font.render(stockTitle, True, colourWhite)
+        # mytft.screen.blit(text_surface, (textAnchorX, textAnchorY))
+        # print stockTitle
+        # textAnchorY+=textYoffset
+        # text_surface = font.render(stockPrice, True, colourWhite)
+        # mytft.screen.blit(text_surface, (textAnchorX, textAnchorY))
+        # print stockPrice
+        # textAnchorY+=textYoffset
+        # text_surface = font.render(stockChange, True, changeColour)
+        # mytft.screen.blit(text_surface, (textAnchorX, textAnchorY))
+        # print stockChange
+        # textAnchorY+=textYoffset
+        mytft.screen.blit("test string", (textAnchorX, textAnchorY))
+        print "print test string"
         textAnchorY+=textYoffset
 
         # refresh the screen with all the changes
