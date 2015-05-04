@@ -21,6 +21,7 @@ class GoogleFinanceAPI:
 # font colours
 colourWhite = (255, 255, 255)
 colourBlack = (0, 0, 0)
+colourGreen = (3, 192, 60)
 
 updateRate = 30 # seconds
  
@@ -98,13 +99,9 @@ if __name__ == "__main__":
         mytft.screen.blit(text_surface, (textAnchorX, textAnchorY))
         print stockPrice
         textAnchorY+=textYoffset
-        text_surface = font.render(stockChange, True, colourWhite)
+        text_surface = font.render(stockChange, True, colourGreen)
         mytft.screen.blit(text_surface, (textAnchorX, textAnchorY))
         print stockChange
-        textAnchorY+=textYoffset
-        text_surface = font.render("test string", True, colourWhite)
-        mytft.screen.blit(text_surface, (textAnchorX, textAnchorY))
-        print stockTitle
         textAnchorY+=textYoffset
 
         # refresh the screen with all the changes
