@@ -72,7 +72,7 @@ def main():
     print 'starting main()'
     # font colours
     colourWhite = (255, 255, 255)
-    colourBlack = (0, 255, 0)
+    colourBlack = (0, 0, 0)
     colourGreen = (3, 192, 60)
     colourRed = (220, 69, 69)
 
