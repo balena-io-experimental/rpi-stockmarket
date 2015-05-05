@@ -17,14 +17,6 @@ class GoogleFinanceAPI:
         
         obj = json.loads(content[3:])
         return obj[0]
-
-# font colours
-colourWhite = (255, 255, 255)
-colourBlack = (0, 0, 0)
-colourGreen = (3, 192, 60)
-colourRed = (220, 69, 69)
-
-updateRate = 15 # seconds
  
 class pitft :
     screen = None;
@@ -63,22 +55,30 @@ class pitft :
     def __del__(self):
         "Destructor to make sure pygame shuts down, etc."
  
-# Create an instance of the PyScope class
-mytft = pitft()
- 
-pygame.mouse.set_visible(False)
- 
-# set up the fonts
-# choose the font
-fontpath = pygame.font.match_font('dejavusansmono')
-# set up 2 sizes
-font = pygame.font.Font(fontpath, 40)
-fontSm = pygame.font.Font(fontpath, 18)
-        
-        
-if __name__ == "__main__":
+def main():
+    print 'starting main()'
+    # font colours
+    colourWhite = (255, 255, 255)
+    colourBlack = (0, 0, 0)
+    colourGreen = (3, 192, 60)
+    colourRed = (220, 69, 69)
+
+    updateRate = 15 # seconds
+
+    # Create an instance of the pitft class
+    mytft = pitft()
+     
+    pygame.mouse.set_visible(False)
+     
+    # set up the fonts
+    # choose the font
+    fontpath = pygame.font.match_font('dejavusansmono')
+    # set up 2 sizes
+    font = pygame.font.Font(fontpath, 40)
+    fontSm = pygame.font.Font(fontpath, 18)
+
     #c = GoogleFinanceAPI()
-    print 'starting'
+
     companyName = os.getenv('STOCK', "GOOG")
     print 'company name: '+companyName
     marketName = os.getenv('MARKET', "NASDAQ")
@@ -120,7 +120,8 @@ if __name__ == "__main__":
         # mytft.screen.blit(text_surface, (textAnchorX, textAnchorY))
         # print stockChange
         # textAnchorY+=textYoffset
-        mytft.screen.blit("test string", (textAnchorX, textAnchorY))
+        text_surface = font.render("stockChange", True, changeColour)
+        mytft.screen.blit(text_surface, (textAnchorX, textAnchorY))
         print "print test string"
         textAnchorY+=textYoffset
 
@@ -129,3 +130,7 @@ if __name__ == "__main__":
  
         # Wait
         time.sleep(updateRate)
+        
+        
+if __name__ == '__main__':
+    main()
