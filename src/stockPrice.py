@@ -141,6 +141,6 @@ def main():
         time.sleep(updateRate)
         
 signal.signal(signal.SIGTERM, signal_handler)
-signal.signal(signal.SIGINT, signal_handler)pyth        
+signal.signal(signal.SIGINT, signal_handler)       
 if __name__ == '__main__':
     main()
