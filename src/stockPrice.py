@@ -42,14 +42,14 @@ class pitft :
         # except pygame.error:
         #     print 'Driver: {0} failed.'.format(driver)
         #     exit(0)
-
+        print 'setting up framebuffer'
         os.environ["SDL_FBDEV"] = "/dev/fb1"
         try:
-            pygame.display.init()
+            pygame.init()
         except pygame.error:
             print 'framebuffer error'
             exit(0)
-            
+        print 'getting screen size'
         size = (pygame.display.Info().current_w, pygame.display.Info().current_h)
         self.screen = pygame.display.set_mode(size, pygame.FULLSCREEN)
         # Clear the screen to start
