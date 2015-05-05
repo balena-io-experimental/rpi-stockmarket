@@ -137,7 +137,7 @@ def main():
 
         icon = installPath+ arrowIcon
         logo = pygame.image.load(icon).convert()
-        mytft.screen.blit(logo, (140, 10))
+        mytft.screen.blit(logo, (200, 10))
 
         # refresh the screen with all the changes
         pygame.display.update()
