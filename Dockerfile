@@ -34,7 +34,7 @@ ENTRYPOINT ["/usr/bin/entry.sh"]
 
 RUN apt-get update && apt-get install -y python python-dev python-pygame nano
 
-ENV INITSYSTEM on
+ENV INITSYSTEM off
 
 ADD /src/ /usr/src/app
 
