@@ -68,6 +68,7 @@ class pitft :
         "Destructor to make sure pygame shuts down, etc."
  
 def main():
+    installPath = "/app/img/"
     print 'starting main()'
     # font colours
     colourWhite = (255, 255, 255)
@@ -75,7 +76,7 @@ def main():
     colourGreen = (3, 192, 60)
     colourRed = (220, 69, 69)
 
-    updateRate = 15 # seconds
+    updateRate = 60 # seconds
 
     # Create an instance of the pitft class
     mytft = pitft()
@@ -107,9 +108,11 @@ def main():
 
         if float(quote["c"]) < 0:
             changeColour = colourRed
+            arrowIcon = "red_arrow.png"
             print 'font colour red'
         else:
             changeColour = colourGreen
+            arrowIcon = "green_arrow.png"
             print 'font colour green'
 
         # blank the screen
@@ -131,6 +134,10 @@ def main():
         mytft.screen.blit(text_surface, (textAnchorX, textAnchorY))
         print stockChange
         textAnchorY+=textYoffset
+
+        icon = installPath+ arrowIcon
+        logo = pygame.image.load(icon).convert()
+        mytft.screen.blit(logo, (140, 10))
 
         # refresh the screen with all the changes
         pygame.display.update()
