@@ -5,7 +5,8 @@ import string
 import urllib2
 import json
 import time
-import sys, signal
+from signal import alarm, signal, SIGALRM, SIGKILL
+
 
 class GoogleFinanceAPI:
     def __init__(self):
@@ -27,32 +28,35 @@ class pitft :
         "Ininitializes a new pygame screen using the framebuffer"
         # Based on "Python GUI in Linux frame buffer"
         # http://www.karoltomala.com/blog/?p=679
-        # disp_no = os.getenv("DISPLAY")
-        # if disp_no:
-        #     print "I'm running under X display = {0}".format(disp_no)
+        disp_no = os.getenv("DISPLAY")
+        if disp_no:
+            print "I'm running under X display = {0}".format(disp_no)
  
-        # os.putenv('SDL_FBDEV', '/dev/fb1')
+        os.putenv('SDL_FBDEV', '/dev/fb1')
  
-        # # Select frame buffer driver
-        # # Make sure that SDL_VIDEODRIVER is set
-        # driver = 'fbcon'
-        # if not os.getenv('SDL_VIDEODRIVER'):
-        #     os.putenv('SDL_VIDEODRIVER', driver)
-        # try:
-        #     pygame.display.init()
-        # except pygame.error:
-        #     print 'Driver: {0} failed.'.format(driver)
-        #     exit(0)
-        print 'setting up framebuffer'
-        os.environ["SDL_FBDEV"] = "/dev/fb1"
+        # Select frame buffer driver
+        # Make sure that SDL_VIDEODRIVER is set
+        driver = 'fbcon'
+        if not os.getenv('SDL_VIDEODRIVER'):
+            os.putenv('SDL_VIDEODRIVER', driver)
+        class Alarm(Exception):
+            pass
+        def alarm_handler(signum, frame):
+            raise Alarm
+        signal(signal.SIGALRM, alarm_handler)
+        alarm(3)
         try:
-            pygame.init()
-        except pygame.error:
-            print 'framebuffer error'
-            exit(0)
-        print 'getting screen size'
-        size = (pygame.display.Info().current_w, pygame.display.Info().current_h)
-        self.screen = pygame.display.set_mode(size, 0, 32)
+            pygame.display.init()
+            print 'getting screen size'
+            size = (pygame.display.Info().current_w, pygame.display.Info().current_h)
+            self.screen = pygame.display.set_mode(size, 0, 32)
+            alarm(0)
+        except Alarm:
+            raise KeyboardInterrupt
+        print 'setting up framebuffer'
+       
+        
+        
         # Clear the screen to start
         self.screen.fill((0, 0, 0))
         # Initialise font support
@@ -63,12 +67,6 @@ class pitft :
     def __del__(self):
         "Destructor to make sure pygame shuts down, etc."
  
-def signal_handler(signal, frame):
-  print 'Signal: {}'.format(signal)
-  sleep(1)
-  pygame.quit()
-  sys.exit(0)
-
 def main():
     print 'starting main()'
     # font colours
@@ -139,8 +137,6 @@ def main():
  
         # Wait
         time.sleep(updateRate)
-        
-signal.signal(signal.SIGTERM, signal_handler)
-signal.signal(signal.SIGINT, signal_handler)       
+             
 if __name__ == '__main__':
     main()
