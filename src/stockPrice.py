@@ -5,6 +5,7 @@ import string
 import urllib2
 import json
 import time
+import sys, signal
 
 class GoogleFinanceAPI:
     def __init__(self):
@@ -61,6 +62,12 @@ class pitft :
  
     def __del__(self):
         "Destructor to make sure pygame shuts down, etc."
+ 
+def signal_handler(signal, frame):
+  print 'Signal: {}'.format(signal)
+  sleep(1)
+  pygame.quit()
+  sys.exit(0)
  
 def main():
     print 'starting main()'
@@ -133,6 +140,7 @@ def main():
         # Wait
         time.sleep(updateRate)
         
-        
+signal.signal(signal.SIGTERM, signal_handler)
+signal.signal(signal.SIGINT, signal_handler)        
 if __name__ == '__main__':
     main()
