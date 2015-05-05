@@ -43,7 +43,7 @@ class pitft :
             pass
         def alarm_handler(signum, frame):
             raise Alarm
-        signal(signal.SIGALRM, alarm_handler)
+        signal(SIGALRM, alarm_handler)
         alarm(3)
         try:
             pygame.display.init()
