@@ -68,7 +68,7 @@ class pitft :
         "Destructor to make sure pygame shuts down, etc."
  
 def main():
-    installPath = "/app/img/"
+    installPath = "/usr/src/app/img/"
     print 'starting main()'
     # font colours
     colourWhite = (255, 255, 255)
