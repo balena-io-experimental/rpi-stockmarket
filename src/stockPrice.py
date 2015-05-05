@@ -52,7 +52,7 @@ class pitft :
             exit(0)
         print 'getting screen size'
         size = (pygame.display.Info().current_w, pygame.display.Info().current_h)
-        self.screen = pygame.display.set_mode(size, pygame.FULLSCREEN)
+        self.screen = pygame.display.set_mode(size, 0, 32)
         # Clear the screen to start
         self.screen.fill((0, 0, 0))
         # Initialise font support
@@ -68,7 +68,7 @@ def signal_handler(signal, frame):
   sleep(1)
   pygame.quit()
   sys.exit(0)
- 
+
 def main():
     print 'starting main()'
     # font colours
@@ -141,6 +141,6 @@ def main():
         time.sleep(updateRate)
         
 signal.signal(signal.SIGTERM, signal_handler)
-signal.signal(signal.SIGINT, signal_handler)        
+signal.signal(signal.SIGINT, signal_handler)pyth        
 if __name__ == '__main__':
     main()
