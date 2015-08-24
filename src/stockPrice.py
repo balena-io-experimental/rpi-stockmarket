@@ -114,7 +114,7 @@ def main():
             print 'font colour green'
 
         # blank the screen
-        mytft.screen.fill(colourGreen)
+        mytft.screen.fill(colourRed)
         # set the anchor for the current weather data text
         textAnchorX = 10
         textAnchorY = 10
