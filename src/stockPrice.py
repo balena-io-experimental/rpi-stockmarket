@@ -1,29 +1,27 @@
-import os, syslog
+import os
 import pygame
 import time
-import string
 import urllib2
 import json
-import time
-from signal import alarm, signal, SIGALRM, SIGKILL
+from signal import alarm, signal, SIGALRM
 
 
 class GoogleFinanceAPI:
     def __init__(self):
         self.prefix = "http://finance.google.com/finance/info?client=ig&q="
-    
+
     def get(self,symbol,exchange):
         url = self.prefix+"%s:%s"%(exchange,symbol)
         u = urllib2.urlopen(url)
         content = u.read()
-        
+
         obj = json.loads(content[3:])
         return obj[0]
- 
+
 class pitft :
-    screen = None;
-    colourBlack = (0, 0, 0)
- 
+    screen = None
+    colourBlack = (0, 0, 120)
+
     def __init__(self):
         "Ininitializes a new pygame screen using the framebuffer"
         # Based on "Python GUI in Linux frame buffer"
@@ -31,9 +29,9 @@ class pitft :
         disp_no = os.getenv("DISPLAY")
         if disp_no:
             print "I'm running under X display = {0}".format(disp_no)
- 
+
         os.putenv('SDL_FBDEV', '/dev/fb1')
- 
+
         # Select frame buffer driver
         # Make sure that SDL_VIDEODRIVER is set
         driver = 'fbcon'
@@ -54,19 +52,19 @@ class pitft :
         except Alarm:
             raise KeyboardInterrupt
         print 'setting up framebuffer'
-       
-        
-        
+
+
+
         # Clear the screen to start
         self.screen.fill((0, 0, 0))
         # Initialise font support
         pygame.font.init()
         # Render the screen
         pygame.display.update()
- 
+
     def __del__(self):
         "Destructor to make sure pygame shuts down, etc."
- 
+
 def main():
     installPath = "/usr/src/app/img/"
     print 'starting main()'
@@ -80,15 +78,15 @@ def main():
 
     # Create an instance of the pitft class
     mytft = pitft()
-     
+
     pygame.mouse.set_visible(False)
-     
+
     # set up the fonts
     # choose the font
     fontpath = pygame.font.match_font('dejavusansmono')
     # set up 2 sizes
     font = pygame.font.Font(fontpath, 40)
-    fontSm = pygame.font.Font(fontpath, 18)
+    #fontSm = pygame.font.Font(fontpath, 18)
 
     c = GoogleFinanceAPI()
 
@@ -121,7 +119,7 @@ def main():
         textAnchorX = 10
         textAnchorY = 10
         textYoffset = 40
- 
+
         text_surface = font.render(stockTitle, True, colourWhite)
         mytft.screen.blit(text_surface, (textAnchorX, textAnchorY))
         print stockTitle
@@ -141,10 +139,10 @@ def main():
 
         # refresh the screen with all the changes
         pygame.display.update()
- 
+
         # Wait
         time.sleep(updateRate)
-             
+
 if __name__ == '__main__':
     print 'starting main()'
     main()
