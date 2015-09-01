@@ -1,7 +1,7 @@
 #Base image
 FROM resin/raspberrypi2-python
 
-RUN apt-get update && apt-get install -y python python-dev python-pygame
+RUN apt-get update && apt-get install -y python-pygame
 
 ENV INITSYSTEM on
 

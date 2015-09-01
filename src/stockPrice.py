@@ -20,7 +20,7 @@ class GoogleFinanceAPI:
 
 class pitft :
     screen = None
-    colourBlack = (0, 0, 120)
+    colourBlack = (0, 0, 0)
 
     def __init__(self):
         "Ininitializes a new pygame screen using the framebuffer"
@@ -114,7 +114,7 @@ def main():
             print 'font colour green'
 
         # blank the screen
-        mytft.screen.fill(colourRed)
+        mytft.screen.fill(colourBlack)
         # set the anchor for the current weather data text
         textAnchorX = 10
         textAnchorY = 10
@@ -135,7 +135,7 @@ def main():
 
         icon = installPath+ arrowIcon
         logo = pygame.image.load(icon).convert()
-        mytft.screen.blit(logo, (200, 10))
+        mytft.screen.blit(logo, (200, 140))
 
         # refresh the screen with all the changes
         pygame.display.update()
