@@ -1,5 +1,5 @@
 #Base image
-FROM resin/raspberrypi2-python
+FROM resin/raspberrypi-python
 
 RUN apt-get update && apt-get install -y python-pygame
 
