@@ -103,7 +103,7 @@ def main():
         print stockPrice
         stockChange = str(quote["c"])
         print stockChange
-        stockPercentChange = ' (' + str(quote["cp"]) + '%)'
+        stockPercentChange = '(' + str(quote["cp"]) + '%)'
 
 
         if float(quote["c"]) < 0:
@@ -124,15 +124,15 @@ def main():
 
         text_surface = font.render(stockTitle, True, colourWhite)
         mytft.screen.blit(text_surface, (textAnchorX, textAnchorY))
-        print stockTitle
+
         textAnchorY+=textYoffset
         text_surface = font.render(stockPrice, True, colourWhite)
         mytft.screen.blit(text_surface, (textAnchorX, textAnchorY))
-        print stockPrice
-        textAnchorY+=textYoffset
+
+        textAnchorY = textAnchorY + textYoffset*2
         text_surface = font.render(stockChange, True, changeColour)
         mytft.screen.blit(text_surface, (textAnchorX, textAnchorY))
-        print stockChange
+
         textAnchorY+=textYoffset
         text_surface = font.render(stockPercentChange, True, changeColour)
         mytft.screen.blit(text_surface, (textAnchorX, textAnchorY))
