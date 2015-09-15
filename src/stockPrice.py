@@ -74,7 +74,7 @@ def main():
     colourGreen = (3, 192, 60)
     colourRed = (220, 69, 69)
 
-    updateRate = 60 # seconds
+    updateRate = 180 # seconds
 
     # Create an instance of the pitft class
     mytft = pitft()
@@ -97,12 +97,13 @@ def main():
 
     while True:
         quote = c.get(companyName,marketName)
-        stockTitle = 'stock: ' + str(quote["t"])
+        stockTitle = 'Stock: ' + str(quote["t"])
         print stockTitle
-        stockPrice = 'price: ' + str(quote["l_cur"])
+        stockPrice = 'Price: $' + str(quote["l_cur"])
         print stockPrice
-        stockChange= str(quote["c"]) + ' (' + str(quote["cp"]) + '%)'
+        stockChange = str(quote["c"])
         print stockChange
+        stockPercentChange = ' (' + str(quote["cp"]) + '%)'
 
 
         if float(quote["c"]) < 0:
@@ -133,10 +134,12 @@ def main():
         mytft.screen.blit(text_surface, (textAnchorX, textAnchorY))
         print stockChange
         textAnchorY+=textYoffset
+        text_surface = font.render(stockPercentChange, True, changeColour)
+        mytft.screen.blit(text_surface, (textAnchorX, textAnchorY))
 
         icon = installPath+ arrowIcon
         logo = pygame.image.load(icon).convert()
-        mytft.screen.blit(logo, (200, 140))
+        mytft.screen.blit(logo, (200, 120))
 
         # refresh the screen with all the changes
         pygame.display.update()
