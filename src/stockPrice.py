@@ -5,7 +5,7 @@ import urllib2
 import json
 from signal import alarm, signal, SIGALRM
 
-
+# creates a small API to get stock data given symbol and market
 class GoogleFinanceAPI:
     def __init__(self):
         self.prefix = "http://finance.google.com/finance/info?client=ig&q="
@@ -18,6 +18,7 @@ class GoogleFinanceAPI:
         obj = json.loads(content[3:])
         return obj[0]
 
+#set up the screen so we can push stuff onto it.
 class pitft :
     screen = None
     colourBlack = (0, 0, 0)
@@ -66,6 +67,7 @@ class pitft :
         "Destructor to make sure pygame shuts down, etc."
 
 def main():
+    #this path is where we store our arrow icons
     installPath = "/usr/src/app/img/"
     print 'starting main()'
     # font colours
@@ -74,24 +76,28 @@ def main():
     colourGreen = (3, 192, 60)
     colourRed = (220, 69, 69)
 
+    #this is how often we check for new stocks
     updateRate = 180 # seconds
 
     # Create an instance of the pitft class
     mytft = pitft()
 
+    #hide the mouse from screen
     pygame.mouse.set_visible(False)
 
     # set up the fonts
     # choose the font
     fontpath = pygame.font.match_font('dejavusansmono')
-    # set up 2 sizes
     font = pygame.font.Font(fontpath, 40)
-    #fontSm = pygame.font.Font(fontpath, 18)
 
+    #create instance of stock api
     c = GoogleFinanceAPI()
 
-    companyName = os.getenv('STOCK', "GOOG")
+    #read the ENV VAR, use GE if 'STOCK' isn't there
+    companyName = os.getenv('STOCK', "GE")
     print 'company name: '+companyName
+
+    #The default MARKET is NASDAQ
     marketName = os.getenv('MARKET', "NASDAQ")
     print 'market name: '+marketName
 
@@ -106,6 +112,7 @@ def main():
         stockPercentChange = '(' + str(quote["cp"]) + '%)'
         print stockPercentChange
 
+        #check if + or -, and display correct arrow and font color
         if float(quote["c"]) < 0:
             changeColour = colourRed
             arrowIcon = "red_arrow.png"
@@ -115,28 +122,33 @@ def main():
             arrowIcon = "green_arrow.png"
             print 'font colour green'
 
-        # blank the screen
+        # clear the screen
         mytft.screen.fill(colourBlack)
-        # set the anchor for the current weather data text
+        # set the anchor/positions for the current stock data text
         textAnchorX = 10
         textAnchorY = 10
         textYoffset = 40
 
+        #print the stock title to screen
         text_surface = font.render(stockTitle, True, colourWhite)
         mytft.screen.blit(text_surface, (textAnchorX, textAnchorY))
 
+        #print the stock price to screen
         textAnchorY+=textYoffset
         text_surface = font.render(stockPrice, True, colourWhite)
         mytft.screen.blit(text_surface, (textAnchorX, textAnchorY))
 
+        #print the stock change value to screen
         textAnchorY = textAnchorY + textYoffset*2
         text_surface = font.render(stockChange, True, changeColour)
         mytft.screen.blit(text_surface, (textAnchorX, textAnchorY))
 
+        #print the stock change percentage to screen
         textAnchorY+=textYoffset
         text_surface = font.render(stockPercentChange, True, changeColour)
         mytft.screen.blit(text_surface, (textAnchorX, textAnchorY))
 
+        #add the icon to the screen
         icon = installPath+ arrowIcon
         logo = pygame.image.load(icon).convert()
         mytft.screen.blit(logo, (220, 140))
@@ -144,7 +156,7 @@ def main():
         # refresh the screen with all the changes
         pygame.display.update()
 
-        # Wait
+        # Wait 'updateRate' seconds until next update
         time.sleep(updateRate)
 
 if __name__ == '__main__':
