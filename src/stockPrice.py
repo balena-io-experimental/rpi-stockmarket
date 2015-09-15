@@ -104,7 +104,7 @@ def main():
         stockChange = str(quote["c"])
         print stockChange
         stockPercentChange = '(' + str(quote["cp"]) + '%)'
-
+        print stockPercentChange
 
         if float(quote["c"]) < 0:
             changeColour = colourRed
