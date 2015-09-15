@@ -101,8 +101,9 @@ def main():
         print stockTitle
         stockPrice = 'price: ' + str(quote["l_cur"])
         print stockPrice
-        stockChange= 'change: ' + str(quote["c"]) + ' (' + str(quote["cp"]) + '%)'
+        stockChange= str(quote["c"]) + ' (' + str(quote["cp"]) + '%)'
         print stockChange
+
 
         if float(quote["c"]) < 0:
             changeColour = colourRed
